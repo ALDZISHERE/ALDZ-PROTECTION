@@ -1,9 +1,3 @@
-
----
-
-### **FILE 2: `/root/ALDZ-PROTECTION-VPS/install.sh`**
-
-```bash
 #!/bin/bash
 # ALDZ PROTECTION VPS - MAIN INSTALLER
 # JALANKAN SEBAGAI ROOT
