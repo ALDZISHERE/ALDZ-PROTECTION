@@ -1,3 +1,4 @@
+
 #!/bin/bash
 # ALDZ PROTECTION VPS - MAIN INSTALLER
 # JALANKAN SEBAGAI ROOT
@@ -44,7 +45,7 @@ pip3 install flask requests watchdog
 
 # 2. SSH HARDENING + 4FA
 echo -e "\n${YELLOW}[2/12] Mengkonfigurasi SSH Hardening & 4FA...${NC}"
-copy_config "configs/ssh/sshd_config.aldz" "/etc/ssh/sshd_config"
+copy_config "configs/ssh/sshd_config" "/etc/ssh/sshd_config"
 copy_config "configs/modules/port-knocking/knockd.conf" "/etc/knockd.conf"
 
 # Aktifkan PAM Google Authenticator
