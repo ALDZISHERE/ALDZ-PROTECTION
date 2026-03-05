@@ -1,0 +1,24 @@
+#!/bin/bash
+# ALDZ Port Knocking Client
+
+SERVER=$2
+PORTS=(7000 8000 9000)
+DELAY=2
+
+case $1 in
+    knock)
+        echo "🚪 Knocking $SERVER ..."
+        for port in "${PORTS[@]}"; do
+            hping3 -2 -c 1 -p $port $SERVER 2>/dev/null
+            sleep $DELAY
+        done
+        echo "✅ Knocking selesai! Coba SSH dalam 10 detik..."
+        ;;
+    status)
+        knock -v $SERVER 7000 8000 9000
+        ;;
+    *)
+        echo "Usage: aldz-knocker knock <IP>"
+        echo "       aldz-knocker status <IP>"
+        ;;
+esac

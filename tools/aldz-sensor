@@ -1,0 +1,33 @@
+#!/bin/bash
+# ALDZ System Sensor - Status monitor
+
+case $1 in
+    status)
+        echo "🔍 ALDZ PROTECTION STATUS"
+        echo "══════════════════════════"
+        echo "UFW: $(ufw status | grep -c active) aktif"
+        echo "Fail2Ban: $(systemctl is-active fail2ban)"
+        echo "Knockd: $(systemctl is-active knockd)"
+        echo "Defender: $(systemctl is-active aldz-defender)"
+        echo "Botblock: $(crontab -l | grep -c botblock) terjadwal"
+        echo "Protected files: $(lsattr /etc/shadow 2>/dev/null | grep -c i)"
+        ;;
+    
+    emergency-stop)
+        echo "⚠️  EMERGENCY STOP - Menonaktifkan proteksi..."
+        ufw disable
+        systemctl stop knockd
+        systemctl stop fail2ban
+        systemctl stop aldz-defender
+        chattr -i /etc/passwd /etc/shadow /etc/group /etc/gshadow 2>/dev/null
+        echo "✅ Mode darurat aktif. Proteksi nonaktif."
+        ;;
+    
+    logs)
+        tail -f /var/log/aldz-protection.log
+        ;;
+    
+    *)
+        echo "Usage: aldz-sensor status|emergency-stop|logs"
+        ;;
+esac
