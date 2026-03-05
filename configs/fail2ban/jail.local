@@ -1,0 +1,20 @@
+[DEFAULT]
+bantime = 3600
+findtime = 600
+maxretry = 3
+ignoreip = 127.0.0.1/8
+action = iptables-allports
+
+[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 2
+
+[aldz-custom]
+enabled = true
+filter = custom-aldz
+logpath = /var/log/aldz-defender.log
+maxretry = 1
+bantime = 86400
